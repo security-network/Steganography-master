@@ -26,7 +26,7 @@ public class embTextToAudio {
 		}
 		audiofile = Embedded(audiofile,Encryption.encode(pass, ConvertUTF8.toBinary(str, ConstantValue.bitrate)));
 		IOaudio.setAudio(audiofile,"testAudio.wav");
-		JOptionPane.showMessageDialog(null, "Successfully!", "Success",JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Successfully! ", "Success",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void Decoder(String filesource, String filedestination, String pass)
