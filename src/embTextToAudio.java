@@ -1,13 +1,7 @@
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.swing.JOptionPane;
 
 
@@ -26,7 +20,7 @@ public class embTextToAudio {
 		}
 		audiofile = Embedded(audiofile,Encryption.encode(pass, ConvertUTF8.toBinary(str, ConstantValue.bitrate)));
 		IOaudio.setAudio(audiofile,"testAudio.wav");
-		JOptionPane.showMessageDialog(null, "Successfully! ", "Success",JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Successfully!", "Success",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void Decoder(String filesource, String filedestination, String pass)
@@ -47,9 +41,10 @@ public class embTextToAudio {
 	
 	private byte[] readbyte(AudioInputStream audio)
 	{
-		long bytesread = audio.getFrameLength();
+		long frame = audio.getFrameLength();
 		int bytesPerFrame = audio.getFormat().getFrameSize();
-		audiobyte = new byte[(int)bytesread * bytesPerFrame];
+		int bytesread = (int)frame * bytesPerFrame;
+		audiobyte = new byte[bytesread];
 		try {
 			audio.read(audiobyte);
 		   
@@ -118,7 +113,7 @@ public class embTextToAudio {
 			}
 			k++;
 	    }// for j
-	    for (int i=k; i<length; i++){
+	    for (int i=k; i<=length; i++){
 	    	if ((audiobyte[i] & 0x01)!=0){
 	    		str += "1";
 	    	}
